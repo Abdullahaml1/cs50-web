@@ -2,9 +2,51 @@
 <html lang="en" >
     <head>
         <title> form </title>
+        <style>
+
+         #form-container {
+             background-color: orange;
+             text-align: center;
+             width: 300px;
+             margin: auto;
+         }
+
+
+         #grander-container {
+             text-align:left;
+             width:4.6em;
+             margin: auto;
+         }
+
+        </style>
     </head>
 
     <body>
+        <div id="form-container" >
+            <form>
+                for attribute of the label related to the id<br>
+                <label for="username"  > User Name: </label>
+                <input type="text" name="username" id="username" ><br>
+
+                <input type="password" name="password" id="password" placeholder="Enter your password" ><br>
+
+                <div id="grander-container"
+                    <label for="grander" > Grander </label>:<br>
+                    <input type="radio" name="grander" id="grander" value="Male" >Male<br>
+                    <input type="radio" name="grander" id="grander" value="Female" >Female<br>
+                </div>
+
+                <label for="sport" > I love : </label>
+                <input type="checkbox" name="sport" id="sport" value="cycling">cycling
+                <input type="checkbox" name="sport" id="sport" value="running">running
+                <input type="checkbox" name="sport" id="sport" value="other">other
+                <input type="text" id="other-sport" name="other-sport" placeholder="Enter the other sport" ><br>
+
+                <input type="submit" >
+
+
+            </form>
+        </div>
     </body>
 </html>
 
