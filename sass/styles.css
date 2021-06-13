@@ -1,0 +1,22 @@
+/*a minix */
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+  background-color: #AAAAAA;
+}
+
+.table-container {
+  width: 66.6666666667%;
+  margin: auto;
+  padding: 30px;
+  border: 2px solid black;
+}
+.table-container #animals-table {
+  border-collapse: collapse;
+  margin: auto;
+}
+.table-container #animals-table td, .table-container #animals-table th {
+  border: 2px solid red;
+}
+
+/*# sourceMappingURL=styles.css.map */

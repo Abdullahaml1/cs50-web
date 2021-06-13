@@ -1,0 +1,50 @@
+$main-fonts: arial,sans-serif;
+$main-color: #222;
+$main-font-size: 14px;
+
+$navbar-fonts: 13px/27px Roboto,RobotoDraft,Arial,sans-serif;
+#search-svg {
+    width: 20px;
+}
+
+body {
+    font-family: $main-fonts;
+    font-size: $main-font-size;
+    color: $main-color;
+    background-color: #fff;
+
+}
+
+.nav-bar {
+    font: $navbar-fonts;
+    display: flex;
+    justify-content: flex-end; // horizontal alignment
+    align-items: center;   //vertical alignment
+    height: 48px;
+    background-color: green;
+
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline-block;
+            margin-right: 15px;
+
+            a {
+                text-decoration: none;
+                color: rgba(0,0,0,0.87);
+
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+}
+
+

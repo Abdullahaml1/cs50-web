@@ -1,0 +1,37 @@
+#search-svg {
+  width: 20px;
+}
+
+body {
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  color: #222;
+  background-color: #fff;
+}
+
+.nav-bar {
+  font: 13px/27px Roboto, RobotoDraft, Arial, sans-serif;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 48px;
+  background-color: green;
+}
+.nav-bar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-bar ul li {
+  display: inline-block;
+  margin-right: 15px;
+}
+.nav-bar ul li a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.87);
+}
+.nav-bar ul li a:hover {
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=main-styles.css.map */
