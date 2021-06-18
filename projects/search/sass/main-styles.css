@@ -29,32 +29,17 @@ body {
 .nav-bar ul li a {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.87);
-  font-family: arial, sans-serif;
 }
 .nav-bar ul li a:hover {
   text-decoration: underline;
 }
 
-.googlelogo-container {
-  background-color: #AAA;
+.googlelogo-containter {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 92px;
   max-height: 290px;
-  height: calc(100vh - 560px);
 }
-.googlelogo-container .googlelogo {
-  margin-top: auto;
-}
-
-/*
-TODO:
-1. finsish the search box
-2. see the final touches
-3. set up hover of the search box
-4. finish the search buttons with its hover
-
-*/
 
 /*# sourceMappingURL=main-styles.css.map */
