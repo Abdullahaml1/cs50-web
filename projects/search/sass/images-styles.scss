@@ -1,0 +1,34 @@
+.googlelogo-container {
+    padding-top: 93px;
+}
+
+.googlelogo {
+    height: 92px;
+    width: 272px;
+
+    span {
+        color: #4285f4;
+        font: 16px/16px roboto-regular, arial, sans-serif;
+        position: relative;
+        left: 215px;
+        top: -20px;
+    }
+}
+
+
+.button-svg {
+    input[type="submit"] {
+        display: none;
+    }
+
+    cursor: pointer;
+    padding-top: 8px;
+    padding-right:13px;
+
+    svg {
+        height: 24px;
+        width: 24px;
+        color: #4285f4;
+        fill:currentColor;
+    }
+}
