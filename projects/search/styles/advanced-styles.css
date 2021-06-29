@@ -1,0 +1,114 @@
+/* navbar */
+body {
+  /* margin:0; */
+}
+
+.googlelogo-link-container {
+  margin-right: auto;
+}
+.googlelogo-link-container img {
+  /* width: 74px; */
+  height: 24px;
+  padding: 12px;
+}
+
+.nav-bar {
+  height: 72px;
+}
+
+.advanced-titile {
+  color: #d93025;
+  font-size: 20px;
+  padding: 25px 35px;
+  margin: 0;
+  font-weight: normal;
+  border-bottom: 1px #DDD solid;
+}
+
+/* Advanced form */
+.advanced-search-container {
+  max-width: 1140px;
+  min-width: 200px;
+  width: 96%;
+  margin: 40px 2% 0 45px;
+}
+.advanced-search-container .form-title {
+  padding: 5px 0;
+  font-size: 16px;
+}
+.advanced-search-container .search-field {
+  padding: 5px 0;
+  display: flex;
+}
+.advanced-search-container .search-field .input-name {
+  width: 167px;
+  padding: 5px 0;
+}
+.advanced-search-container .search-field .search-input {
+  padding: 5px 0;
+  width: 50%;
+  min-width: 169px;
+  text-align: left;
+  border-radius: 1px;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  font-size: 13px;
+  height: 25px;
+  padding: 1px 8px;
+  text-rendering: auto;
+  appearance: auto;
+  cursor: text;
+  margin: 0em;
+  font: 400 13.3333px Arial;
+}
+.advanced-search-container .search-field .search-input:focus {
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid #4d90fe;
+  outline: none;
+}
+.advanced-search-container input[type=submit] {
+  height: 30px;
+  min-width: 120px;
+  float: right;
+  margin: 10px 0;
+  box-shadow: none;
+  background-color: #4d90fe;
+  border: 1px solid #3079ed;
+  color: #fff;
+  border-radius: 2px;
+  cursor: default;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+}
+.advanced-search-container input[type=submit]:hover {
+  background-color: #357ae8;
+  border: 1px solid #2f5bb7;
+  border-image: initial;
+}
+.advanced-search-container input[type=submit]:active {
+  background: #357ae8;
+  border: 1px solid #2f5bb7;
+  border-top: 1px solid #2f5bb7;
+}
+.advanced-search-container input[type=submit]:active {
+  border: 1px solid #fff;
+  outline: 1px solid #4d90fe;
+}
+
+#advanced-submit {
+  width: calc(50% + 10px);
+  min-width: 179px;
+  border: none;
+  height: auto;
+  cursor: default;
+}
+
+@media (max-width: 450px) {
+  .search-field {
+    flex-direction: column;
+  }
+}
+
+/*# sourceMappingURL=advanced-styles.css.map */
