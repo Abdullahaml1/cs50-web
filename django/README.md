@@ -101,5 +101,12 @@ urlpatterns = [
 
 ```
 
+6. run your project and test your `hello` app:
+```
+python3 manage.py runserver
+```
+
+7. open your browser and enter `localhost:8000/hello` your will see hello world
+
 
 
