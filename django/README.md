@@ -78,21 +78,6 @@ name: way to use this url
 ```python3
 """hello_project URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -108,5 +93,98 @@ python3 manage.py runserver
 
 7. open your browser and enter `localhost:8000/hello` your will see hello world
 
+# Django Templates
+A template is and html file to be viewed to the user
+1. template should be in `<app name>/templates/<app name>/index.html` </br>
+2. styles sheets and `static` files should be in `<app name>/static/<app name>/index.html` and to use it at the html document
+```html
+
+{% load static %} <!-- load static files -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> New Year </title>
+    </head>
+    <link rel="stylesheet" href="{% static 'newyear/styles.css' %}">
+    <body> 
+
+        {% if is_new_year %}
+        <h1> YES </h1>
+        {% else %}
+        <h1> NO </h1>
+        {% endif %}
+
+    </body>
+</html>
+```
+
+3. then write the function to load this template in `views.py`
+```python3
+def index(request):
+    now = datetime.datetime.now()
+    template = loader.get_template("newyear/index.html")
+    context = {"is_new_year": now.year==2022 and now.month==1}
+    return HttpResponse(template.render(context, request))
+# short way for rendering the template
+# def index(request):
+#     return render(request, "newyear/index.html", {"is_new_year": False})
+
+```
+That code loads the template called polls/index.html and passes it a context. The context is a dictionary mapping template variable names to Python objects.
+
+
+# Layout and Template inheritance
+to use a base template and include it into all html pages of the app or in all the project:
+* in `<app name>/templates/<app name>/layout.html`
+```html
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Tasks </title>
+    </head>
+    <body>
+        <header>
+            <a href="{% url 'tasks:index' %}">TODO</a>
+            <a href="{% url 'tasks:add' %}">Add a New Task</a>
+        </header>
+        {% block body %} 
+        {% endblock %}
+    </body>
+</html>
+```
+we defined a block called `body` we can name it any thing that we will use to insert our html code
+* in `<app name>/templates/<app name>/index.html`
+```html
+{% extends "tasks/layout.html" %}
+
+{% block body %}
+
+<h2> TODO List </h1>
+<ul>
+    {% for task in tasks_list %}
+    <li> {{ task }} </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+```
+`{% extends "tasks/layout.html" %}` means include this `layout.html`
+
+## good way to add urls in the webpage
+`<a href="{% url 'tasks:index' %}">TODO</a>` is to use `url` keyword of template language of django this will include `<app name>/urls` with its name like this
+`path("", views.index, name="index")` and the actual url will be `tasks/index`
+* **in order to use app name inside {% url %} we have to put a variable `app_name='<the app name>'` into ``urls.py``**
+```python3
+from django.urls import path
+from . import views
+
+app_name = 'tasks'
+
+urlpatterns = [
+    path("", views.index, name="index"),
+    path("add", views.add, name="add")
+]
+```
 
 

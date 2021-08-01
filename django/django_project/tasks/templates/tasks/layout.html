@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title> Tasks </title>
+    </head>
+    <body>
+        <header>
+            <a href="{% url 'tasks:index' %}">TODO</a>
+            <a href="{% url 'tasks:add' %}">Add a New Task</a>
+        </header>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>
