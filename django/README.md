@@ -207,7 +207,7 @@ This line adds a hidden input field with the CSRF token provided by Django, such
 <input type="hidden" name="csrfmiddlewaretoken" value="XLP5CtxjjXSvRSDrtPxbvfUrOtnpfPy3NiUR0HCpdt57j9MN54roy0bZztp9v596">
 ```
 
-# Django Forms [taskform app](djnago_project/taskform)
+# Django Forms [taskform app](django_project/taskform)
 * **Resources:** [django forms tutorial](https://docs.djangoproject.com/en/3.2/topics/forms/), [django filed reference](https://docs.djangoproject.com/en/3.2/ref/forms/fields/)
 
 * django forms has a class `django.forms.Form` class that generate an boject that is fieled with the forms fields and generates a variable coressponds to the forms html
@@ -219,8 +219,6 @@ from django import forms
 
 class TaskForm (forms.Form):
     taskname = forms.CharField(label="Task Name", max_length=100)
-    priority = forms.IntegerField(label="Priority", required=False,
-                            min_value=0, max_value=10)
 
 ```
 
@@ -251,7 +249,6 @@ A Form instance has an is_valid() method, which runs validation routines for all
 after rendering the form variable will be:
 ```html
 <tr><th><label for="id_taskname">Task Name:</label></th><td><input type="text" name="taskname" maxlength="100" required id="id_taskname"></td></tr>
-<tr><th><label for="id_priority">Priority:</label></th><td><input type="number" name="priority" min="0" max="10" id="id_priority"></td></tr>
 
 ```
 
@@ -307,7 +304,7 @@ If is_valid() is True, we’ll now be able to find all the validated form data i
 
 ```
 
-# Sessions [code from taskform app](djangoproject/taksform)
+# Sessions [code from taskform app](django_project/taksform)
 
 At this point, we’ve successfully built an application that allows us to add tasks to a growing list. However, it may be a problem that we store these tasks as a global variable, as it means that all of the users who visit the page see the exact same list. In order to solve this problem we’re going to employ a tool known as sessions.
 
