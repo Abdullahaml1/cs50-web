@@ -8,3 +8,5 @@ implementation of cs50 web course
 3. class
 4. type
 (despite the order)
+
+# Django [my Djnago README](django/README.md)
