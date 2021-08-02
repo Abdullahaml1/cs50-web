@@ -22,5 +22,6 @@ urlpatterns = [
     #include all urls from hello app "hello/urls.py"
     path('hello/', include("hello.urls")),
     path('newyear/', include("newyear.urls")),
-    path('tasks/', include("tasks.urls"))
+    path('tasks/', include("tasks.urls")),
+    path('taskform/', include("taskform.urls"))
 ]

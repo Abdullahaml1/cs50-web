@@ -207,7 +207,7 @@ This line adds a hidden input field with the CSRF token provided by Django, such
 <input type="hidden" name="csrfmiddlewaretoken" value="XLP5CtxjjXSvRSDrtPxbvfUrOtnpfPy3NiUR0HCpdt57j9MN54roy0bZztp9v596">
 ```
 
-# Django Forms [taskform app](djnago_project/taskform)
+# Django Forms
 * **Resources:** [django forms tutorial](https://docs.djangoproject.com/en/3.2/topics/forms/), [django filed reference](https://docs.djangoproject.com/en/3.2/ref/forms/fields/)
 
 * django forms has a class `django.forms.Form` class that generate an boject that is fieled with the forms fields and generates a variable coressponds to the forms html
@@ -254,88 +254,3 @@ after rendering the form variable will be:
 <tr><th><label for="id_priority">Priority:</label></th><td><input type="number" name="priority" min="0" max="10" id="id_priority"></td></tr>
 
 ```
-
-
-## Retrieving data from the form
-Form data sent back to a Django website is processed by a view, generally the same view which published the form. This allows us to reuse some of the same logic.
-
-To handle the form we need to instantiate it in the view for the URL where we want it to be published: views.py
-```python3
-def add(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = myforms.TaskForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-
-            task = form.cleaned_data["taskname"]
-            # request.session['tasks_list'] += [task]
-            request.session['tasks_list'].append(task)
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/taskform/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = myforms.TaskForm()
-
-    context = {'form': form}
-    return render(request, 'taskform/add.html', context)
-
-```
-If we arrive at this view with a GET request, it will create an empty form instance and place it in the template context to be rendered. This is what we can expect to happen the first time we visit the URL.
-
-If the form is submitted using a POST request, the view will once again create a form instance and populate it with data from the request: form = TaskForm(request.POST) This is called “binding data to the form” (it is now a bound form).
-
-We call the form’s is_valid() method; if it’s not True, we go back to the template with the form. This time the form is no longer empty (unbound) so the HTML form will be populated with the data previously submitted, where it can be edited and corrected as required.
-
-If is_valid() is True, we’ll now be able to find all the validated form data in its cleaned_data attribute. We can use this data to update the database or do other processing before sending an HTTP redirect to the browser telling it where to go next.
-* The template `add.html`
-```html
-{% extends "taskform/layout.html" %}
-{% block body %}
-<h2> Add Task: </h2>
-<form action="{% url 'taskform:add' %}" method="POST" >
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Sbumit" >
-</form>
-<a href="{% url 'taskform:index' %}" > My Tasks </a>
-{% endblock %}
-
-```
-
-# Sessions [code from taskform app](djangoproject/taksform)
-
-At this point, we’ve successfully built an application that allows us to add tasks to a growing list. However, it may be a problem that we store these tasks as a global variable, as it means that all of the users who visit the page see the exact same list. In order to solve this problem we’re going to employ a tool known as sessions.
-
-Sessions are a way to store unique data on the server side for each new visit to a website.
-* from `views.py`
-```python3
-def add(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = myforms.TaskForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-            # process the data in form.cleaned_data as required
-
-            task = form.cleaned_data["taskname"]
-            # request.session['tasks_list'] += [task]
-            request.session['tasks_list'].append(task)
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/taskform/')
-
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        form = myforms.TaskForm()
-
-    context = {'form': form}
-    return render(request, 'taskform/add.html', context)
-
-```
-Finally, before Django will be able to store this data, we must run `python manage.py migrate` in the terminal. Next week we’ll talk more about what a migration is, but for now just know that the above command allows us to store sessions.
