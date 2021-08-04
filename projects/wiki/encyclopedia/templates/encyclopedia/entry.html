@@ -7,6 +7,13 @@
 
 
 {% block body %}
-{{ error_message }}
+
+{% if error_message %}
+<div class="alert alert-danger page-not-found" role="alert">
+    {{ error_message }}
+</div>
+{% endif %}
+
 {{ entry_body|safe }}
+
 {% endblock %}

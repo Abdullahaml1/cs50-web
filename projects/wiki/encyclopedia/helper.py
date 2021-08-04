@@ -33,3 +33,48 @@ def get_entry(title, func):
     return (correct_title, content)
 
 
+
+
+
+
+def is_title(title, correct_title):
+    def func(x, y):
+        return x == y
+
+    return pattern_search(title, correct_title, func)
+
+
+def in_title(title, correct_title):
+    def func(x, y):
+        return x in y
+
+    return pattern_search(title, correct_title, func)
+
+
+
+"""
+Trying all string patterns:(upper, lower, capitalize) to finding the matching title
+Input:
+     title: string
+     correct_title : string to compared
+     func: function that returns true and false
+Output:
+   returns True: if the title is found in the patterns
+           Fales if failed in all patterns
+"""
+def pattern_search(title, correct_title, func):
+
+    if func(title, correct_title):
+        return True
+
+
+    if func(title.lower().capitalize(), correct_title):
+        return True
+
+    if func(title.lower(), correct_title):
+        return True
+
+    if func(title.upper(), correct_title):
+        return True
+
+    return False
