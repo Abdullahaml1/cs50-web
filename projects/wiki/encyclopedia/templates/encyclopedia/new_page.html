@@ -1,0 +1,25 @@
+{% extends 'encyclopedia/layout.html' %}
+
+
+{%block title %}
+Create New Page
+{% endblock %}
+
+
+{% block body %}
+
+{% if error_message %}
+<div class="alert alert-danger page-not-found" role="alert">
+    {{ error_message }}
+</div>
+{% else %}
+
+<form action="/wiki/new_page" method="POST" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <textarea name="Text" Id="Text" value=""> </textarea>
+    <input type="submit" value="save" >
+</form>
+
+{% endif %}
+{% endblock %}
