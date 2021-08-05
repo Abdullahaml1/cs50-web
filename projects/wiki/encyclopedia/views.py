@@ -66,5 +66,30 @@ def search(request):
 
 
 def new_page(request):
-    context= {'form':wiki_forms.NewPage()}
+
+    initial_data = {'content': "Type HERE the body of the topic"}
+
+    if request.method == "POST":
+        form = wiki_forms.NewPage(request.POST, initial=initial_data)
+
+        if form.is_valid():
+
+            # checking that all fields values has changed
+            if len(form.changed_data) == len(form.cleaned_data):
+
+                title = form.cleaned_data['title']
+                content = form.cleaned_data['content']
+
+                # TODO ------------------------------------->>>>>>>>>>>>>>>>>
+                saved_title = '-'.join(title.split(' '))
+                util.save_entry(title, content)
+
+                return HttpResponseRedirect(f"/wiki/{title}")
+
+            else:
+                context= {'form':form}
+                return render(request, "encyclopedia/new_page.html", context)
+
+    # for GET request
+    context= {'form':wiki_forms.NewPage(initial=initial_data)}
     return render(request, "encyclopedia/new_page.html", context)

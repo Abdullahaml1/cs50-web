@@ -16,9 +16,17 @@ Create New Page
 
 <form action="/wiki/new_page" method="POST" >
     {% csrf_token %}
-    {{ form.as_p }}
-    <textarea name="Text" Id="Text" value=""> </textarea>
-    <input type="submit" value="save" >
+
+    <div calss="form-input" >
+        {{ form.title.errors}}
+        {{ form.title.label_tag }}
+        {{ form.title }}
+    </div>
+    <div calss="form-input" >
+        {{ form.content.errors}}
+        {{ form.content }}
+        <input type="submit" value="save" >
+    </div>
 </form>
 
 {% endif %}
