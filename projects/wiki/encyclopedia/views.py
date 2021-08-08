@@ -1,13 +1,19 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+import re
 
 from . import util, helper, wiki_forms
 from markdown2 import markdown
 
 
 def index(request):
+
+    entries_list =[]
+    for name in util.list_entries():
+        entries_list.append({'title': re.sub(r'_', ' ', name), 'url': name})
+
     return render(request, "encyclopedia/index.html", {
-        "entries": util.list_entries()
+        "entries": entries_list
     })
 
 
@@ -80,11 +86,12 @@ def new_page(request):
                 title = form.cleaned_data['title']
                 content = form.cleaned_data['content']
 
-                # TODO ------------------------------------->>>>>>>>>>>>>>>>>
-                saved_title = '-'.join(title.split(' '))
-                util.save_entry(title, content)
+                # replace space with single underscore '_' ex: "ALLAH is one" to
+                # "ALLAH_is_one"
+                saved_title = re.sub(r"\s", '_', title)
+                util.save_entry(saved_title, content)
 
-                return HttpResponseRedirect(f"/wiki/{title}")
+                return HttpResponseRedirect(f"/wiki/{saved_title}")
 
             else:
                 context= {'form':form}

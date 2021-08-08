@@ -1,4 +1,4 @@
-
+import re
 
 """
 Trying all string patterns:(upper, lower, capitalize) to finding the matching title
@@ -9,6 +9,7 @@ Output:
      tuple (title, content)
 """
 def get_entry(title, func):
+
 
     correct_title= title
     content = func(title)
@@ -38,6 +39,7 @@ def get_entry(title, func):
 
 
 def is_title(title, correct_title):
+
     def func(x, y):
         return x == y
 
