@@ -56,3 +56,16 @@ def in_title(title, correct_title):
     return title.lower() in correct_title.lower()
 
 
+"""
+checks if a string exists in a list of strings
+"""
+def is_title_exists(title, titles_list):
+
+    for valid_title in titles_list:
+        if valid_title.lower() == title.lower():
+            return valid_title
+
+    return None
+
+
+

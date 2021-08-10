@@ -48,15 +48,12 @@ def search(request):
         if 'q' in request.GET:
             search_title = request.GET['q']
 
-            # searching for the titles
-            for title in util.list_entries() :
-
-                # if the title matches a title
-                title_sperated_with_space = re.sub(r'_', ' ', title)
-                if helper.is_title(search_title, title_sperated_with_space):
-
-                    # redirect to the page requested
-                    return HttpResponseRedirect(f"/wiki/{title}")
+            # searching for a matching title
+            search_title_seprated_with_underscore=re.sub(r'\s', '_', search_title)
+            valid_title = helper.is_title_exists(search_title_seprated_with_underscore, util.list_entries())
+            if valid_title:
+                # redirect to the page requested
+                return HttpResponseRedirect(f"/wiki/{valid_title}")
 
             # trying to find mataches in the title
             search_matches_list=[]
@@ -97,9 +94,19 @@ def new_page(request):
                 # replace space with single underscore '_' ex: "ALLAH is one" to
                 # "ALLAH_is_one"
                 saved_title = re.sub(r"\s", '_', title)
-                util.save_entry(saved_title, content)
 
-                return HttpResponseRedirect(f"/wiki/{saved_title}")
+                if helper.is_title_exists(saved_title, util.list_entries()):
+                    # display error
+                    context = {'title_exists_error': f"The title exists before Please Enter a different one, or go to the topic and edit it !",
+                               'form': form}
+
+                    return render(request, "encyclopedia/new_page.html", context)
+
+                else:
+                    # save entry
+                    util.save_entry(saved_title, content)
+
+                    return HttpResponseRedirect(f"/wiki/{saved_title}")
 
             else:
                 context= {'form':form,
@@ -136,9 +143,7 @@ def edit_entry(request, title):
     # submitting edit form
     if request.method == 'POST':
         form = wiki_forms.EditEntry(request.POST, initial=initial_data)
-        print('post mehtod')
         if form.is_valid():
-            print("yes it is valid")
             content = form.cleaned_data['content']
             util.save_entry(entry_title_dict['url'], content)
 

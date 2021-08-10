@@ -18,6 +18,12 @@ Create New Page
     {% csrf_token %}
 
     <div calss="form-input" >
+        {% if title_exists_error %}
+        <div class="alert alert-danger page-not-found" role="alert">
+            {{ title_exists_error }}
+        </div>
+        {% endif %}
+
         {{ form.title.errors}}
         {{ form.title.label_tag }}
         {{ form.title }}
@@ -28,7 +34,7 @@ Create New Page
         <div class="alert alert-danger page-not-found" role="alert">
         {{ content_not_filled_error }}
         </div>
-        {% endif % }
+        {% endif %}
 
         {{ form.content.errors}}
         {{ form.content }}
