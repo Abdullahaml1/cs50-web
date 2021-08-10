@@ -24,9 +24,12 @@ Create New Page
     </div>
     <div calss="form-input" >
 
+        {% if content_not_filled_error %}
         <div class="alert alert-danger page-not-found" role="alert">
         {{ content_not_filled_error }}
         </div>
+        {% endif % }
+
         {{ form.content.errors}}
         {{ form.content }}
         <input type="submit" value="save" >
