@@ -15,12 +15,15 @@ def get_entry(title, func):
     content = func(title)
 
     if content == None:
-        correct_title = title.lower().capitalize()
+        # capitalize
+        str_list = title.split('_')
+        correct_title = '_'.join([str.lower().capitalize() for str in str_list])
         content = func(correct_title)
     else:
         return (correct_title, content)
 
     if content == None:
+        # lower cases
         correct_title = title.upper()
         content = func(correct_title)
     else:
@@ -28,6 +31,7 @@ def get_entry(title, func):
 
 
     if content == None:
+        # upper cases
         correct_title = title.lower()
         content = func(correct_title)
 
@@ -37,46 +41,18 @@ def get_entry(title, func):
 
 
 
-
+"""
+case insensitive string equality
+"""
 def is_title(title, correct_title):
-
-    def func(x, y):
-        return x == y
-
-    return pattern_search(title, correct_title, func)
+    return title.lower() == correct_title.lower()
 
 
+
+"""
+case insensitive string matching
+"""
 def in_title(title, correct_title):
-    def func(x, y):
-        return x in y
-
-    return pattern_search(title, correct_title, func)
+    return title.lower() in correct_title.lower()
 
 
-
-"""
-Trying all string patterns:(upper, lower, capitalize) to finding the matching title
-Input:
-     title: string
-     correct_title : string to compared
-     func: function that returns true and false
-Output:
-   returns True: if the title is found in the patterns
-           Fales if failed in all patterns
-"""
-def pattern_search(title, correct_title, func):
-
-    if func(title, correct_title):
-        return True
-
-
-    if func(title.lower().capitalize(), correct_title):
-        return True
-
-    if func(title.lower(), correct_title):
-        return True
-
-    if func(title.upper(), correct_title):
-        return True
-
-    return False

@@ -2,11 +2,13 @@
 
 
 {%block title %}
-{{ entry_title }}
+{{ entry_title.tile }}
 {% endblock %}
 
 
 {% block body %}
+
+<a class="edit" href="/wiki/edit_entry/{{ entry_title.url }}" > edit </a>
 
 {% if error_message %}
 <div class="alert alert-danger page-not-found" role="alert">

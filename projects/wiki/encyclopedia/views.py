@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 import re
+import random
 
 from . import util, helper, wiki_forms
 from markdown2 import markdown
@@ -21,7 +22,9 @@ def display_entry(request, title):
 
 
     correct_title, content = helper.get_entry(title, util.get_entry)
-    context = {'entry_title': correct_title}
+    entry_title_dict = {'title': re.sub(r'_', ' ', correct_title),
+                        'url': correct_title}
+    context = {'entry_title': entry_title_dict}
 
     if content == None:
         context['error_message'] = f"Page \"wiki/{title}\" Not found"
@@ -48,7 +51,9 @@ def search(request):
             # searching for the titles
             for title in util.list_entries() :
 
-                if helper.is_title(search_title, title):
+                # if the title matches a title
+                title_sperated_with_space = re.sub(r'_', ' ', title)
+                if helper.is_title(search_title, title_sperated_with_space):
 
                     # redirect to the page requested
                     return HttpResponseRedirect(f"/wiki/{title}")
@@ -57,8 +62,11 @@ def search(request):
             search_matches_list=[]
             for title in util.list_entries():
 
-                if helper.in_title(search_title, title):
-                    search_matches_list.append(title)
+                title_sperated_with_space = re.sub(r'_', ' ', title)
+                if helper.in_title(search_title, title_sperated_with_space):
+                    d = {'title': re.sub('_', ' ', title),
+                         'title_url': title}
+                    search_matches_list.append(d)
 
             context = {'search_title': search_title}
             if search_matches_list == []:
@@ -94,9 +102,60 @@ def new_page(request):
                 return HttpResponseRedirect(f"/wiki/{saved_title}")
 
             else:
-                context= {'form':form}
+                context= {'form':form,
+                          'content_not_filled_error': 'Please fill in the body of the topic'}
                 return render(request, "encyclopedia/new_page.html", context)
 
     # for GET request
     context= {'form':wiki_forms.NewPage(initial=initial_data)}
     return render(request, "encyclopedia/new_page.html", context)
+
+
+
+
+
+def edit_entry(request, title):
+
+
+    correct_title, content = helper.get_entry(title, util.get_entry)
+    entry_title_dict = {'title': re.sub(r'_', ' ', correct_title),
+                        'url': correct_title}
+    context = {'entry_title': entry_title_dict}
+
+    if content == None:
+        context['error_message'] = f"Page \"wiki/{title}\" Not found"
+        return render(request, "encyclopedia/edit_entry.html", context)
+
+    # to display the title as the same in the url
+    if title != correct_title:
+        return HttpResponseRedirect(f"/wiki/edit/{correct_title}")
+
+
+    initial_data = {'content': content}
+
+    # submitting edit form
+    if request.method == 'POST':
+        form = wiki_forms.EditEntry(request.POST, initial=initial_data)
+        print('post mehtod')
+        if form.is_valid():
+            print("yes it is valid")
+            content = form.cleaned_data['content']
+            util.save_entry(entry_title_dict['url'], content)
+
+            return HttpResponseRedirect(f"/wiki/{entry_title_dict['url']}")
+
+
+
+    form = wiki_forms.EditEntry(initial = initial_data)
+    context['form']=form
+
+    return render(request, "encyclopedia/edit_entry.html", context)
+
+
+def random_entry(request):
+    entries_list = util.list_entries()
+    random_entry = entries_list[random.randint(0, len(entries_list)-1)]
+
+    return HttpResponseRedirect(f"/wiki/{random_entry}")
+
+

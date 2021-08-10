@@ -2,7 +2,7 @@
 
 
 {%block title %}
-Create New Page
+Edit {{ entry_title.title }}
 {% endblock %}
 
 
@@ -14,19 +14,20 @@ Create New Page
 </div>
 {% else %}
 
-<form action="/wiki/new_page" method="POST" >
+<form action="/wiki/edit_entry/{{entry_title.url}}" method="POST" >
     {% csrf_token %}
 
     <div calss="form-input" >
-        {{ form.title.errors}}
-        {{ form.title.label_tag }}
-        {{ form.title }}
+        <h3> {{ entry_title.title }} </h3>
     </div>
     <div calss="form-input" >
 
+        {% if content_not_filled_error %}
         <div class="alert alert-danger page-not-found" role="alert">
         {{ content_not_filled_error }}
         </div>
+        {% endif %}
+
         {{ form.content.errors}}
         {{ form.content }}
         <input type="submit" value="save" >
