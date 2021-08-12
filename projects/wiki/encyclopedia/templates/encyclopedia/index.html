@@ -14,7 +14,7 @@
 
     <ul>
         {% for entry in entries %}
-        <li> <a href="/wiki/{{ entry.url }}"> {{entry.title}} </a></li>
+        <li> <a href="{% url 'display_entry' entry.url %}"> {{entry.title}} </a></li>
         {% endfor %}
     </ul>
 

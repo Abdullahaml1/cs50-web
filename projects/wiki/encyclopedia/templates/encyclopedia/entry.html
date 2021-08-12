@@ -16,7 +16,8 @@
 
 {% else %}
 
-<a class="edit" href="/wiki/edit_entry/{{ entry_title.url }}" > edit </a>
+<!-- <a class="edit" href="/wiki/edit_entry/{{ entry_title.url }}" > edit </a> -->
+<a class="edit" href="{% url 'edit_entry' entry_title.url %}" > edit </a>
 {{ entry_body|safe }}
 
 {% endif %}

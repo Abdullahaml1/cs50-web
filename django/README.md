@@ -185,6 +185,17 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("add", views.add, name="add")
 ] 
+
+
+
+### To use urls with args in `hmtl` template
+```html
+{%url 'url_name' ag1 arg2}
+```
+and in  python using `urls.reverse` will substitue with  actual rote value:
+```python3
+form django.urls import reverse
+HttpResponseRedirect(reverse("route_name", args=(arg1, arg2, )))
 ```
 
 # Cross-site resource forgery (csrf)

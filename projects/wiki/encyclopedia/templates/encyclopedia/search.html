@@ -17,7 +17,7 @@ Search for '{{ search_title }}'
 
 <ul>
     {% for entry in search_matches_list %}
-    <li> <a href="/wiki/{{ entry.title_url }}"> {{entry.title}} </a></li>
+    <li> <a href="{% url 'display_entry' entry.title_url %}"> {{entry.title}} </a></li>
     {% endfor %}
 
 {% endif %}

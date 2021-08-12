@@ -14,7 +14,7 @@ Edit {{ entry_title.title }}
 </div>
 {% else %}
 
-<form action="/wiki/edit_entry/{{entry_title.url}}" method="POST" >
+<form action="{% url 'edit_entry'  entry_title.url %}" method="POST" >
     {% csrf_token %}
 
     <div calss="form-input" >

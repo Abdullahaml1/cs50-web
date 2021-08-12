@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 import re
 import random
 
@@ -35,7 +36,8 @@ def display_entry(request, title):
 
     # to display the title as the same in the url
     if title != correct_title:
-        return HttpResponseRedirect(f"/wiki/{correct_title}")
+        # return HttpResponseRedirect(f"/wiki/{correct_title}")
+        return HttpResponseRedirect(reverse("display_entry", args=(correct_title,)))
 
     return render(request, "encyclopedia/entry.html", context)
 
@@ -53,7 +55,9 @@ def search(request):
             valid_title = helper.is_title_exists(search_title_seprated_with_underscore, util.list_entries())
             if valid_title:
                 # redirect to the page requested
-                return HttpResponseRedirect(f"/wiki/{valid_title}")
+                # return HttpResponseRedirect(f"/wiki/{valid_title}")
+                return HttpResponseRedirect(reverse("display_entry",
+                                                    args=(valid_title,)))
 
             # trying to find mataches in the title
             search_matches_list=[]
@@ -102,11 +106,14 @@ def new_page(request):
 
                     return render(request, "encyclopedia/new_page.html", context)
 
+                # if the tile is new (not exist)
                 else:
                     # save entry
                     util.save_entry(saved_title, content)
 
-                    return HttpResponseRedirect(f"/wiki/{saved_title}")
+                    # return HttpResponseRedirect(f"/wiki/{saved_title}")
+                    return HttpResponseRedirect(reverse("display_entry",
+                                                       args=(saved_title, )))
 
             else:
                 context= {'form':form,
@@ -135,7 +142,9 @@ def edit_entry(request, title):
 
     # to display the title as the same in the url
     if title != correct_title:
-        return HttpResponseRedirect(f"/wiki/edit/{correct_title}")
+        # return HttpResponseRedirect(f"/wiki/edit/{correct_title}")
+        return HttpResponseRedirect(reverse("edit_entry",
+                                            args=(correct_title, )))
 
 
     initial_data = {'content': content}
@@ -147,7 +156,9 @@ def edit_entry(request, title):
             content = form.cleaned_data['content']
             util.save_entry(entry_title_dict['url'], content)
 
-            return HttpResponseRedirect(f"/wiki/{entry_title_dict['url']}")
+            # return HttpResponseRedirect(f"/wiki/{entry_title_dict['url']}")
+            return HttpResponseRedirect(reverse("display_entry",
+                                               args=(entry_title_dict['url'], )))
 
 
 
@@ -161,6 +172,8 @@ def random_entry(request):
     entries_list = util.list_entries()
     random_entry = entries_list[random.randint(0, len(entries_list)-1)]
 
-    return HttpResponseRedirect(f"/wiki/{random_entry}")
+    # return HttpResponseRedirect(f"/wiki/{random_entry}")
+    return HttpResponseRedirect(reverse("display_entry",
+                                        args=(random_entry, )))
 
 
