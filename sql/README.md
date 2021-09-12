@@ -3,16 +3,20 @@ pronounced squel
 
 
 | **Commands**                       | **Description**         | **More Info** |
-| `show databases`                   | list databases          |               |
+|------------------------------------+-------------------------+---------------|
 | `use <databease name>`             | switch to the database  |               |
 | `CREATE DATABASE <databases name>` | create new database     |               |
 | `SHOW TABLES`                      | list tables in database |               |
+| `show databases`                   | list databases          |               |
 | `DROP TABLE <table name>`          | remove table            |               |
 | `DESCRIBE <table name>`            | shows  structure table  |               |
 
+
+
 `ALTER TABLE <table name>`
 | **Commands**                                                                      | **Description**    | **Example**                                                         |
-| `RENAME to <new table name`                                                       | rename table       |                                                                     |
+|-----------------------------------------------------------------------------------+--------------------+---------------------------------------------------------------------|
+|                                                                                   | rename table       |                                                                     |
 | `RENAME  COLUMN <old attribute name> to <new attribute name>`                     | rename attribute   |                                                                     |
 | `MODIFY COLUMN <attribute name> <new Type>`                                       | redefines the type | `alter table customers modify customer_name varchar(100) not null;` |
 | `ADD (<new attribute name> <type>, <new attribute name> <type>)`                  | add new column     |                                                                     |
@@ -29,6 +33,7 @@ alter table customers modify customer_name varchar(100) not null;
 
 **CONSTRAINT**
 | **Commands**                                                                                            | **Description**         | **Example** |
+|---------------------------------------------------------------------------------------------------------+-------------------------+-------------|
 | `CONSTRAINT <name it> PRIMARY KEY (cloumn1, column2, ....)`                                             | setting primary key     |             |
 | `CONSTRAINT <name it> FOREIGN KEY (column1_yourtable, ...) REFERENCES other_table(column1_to_link,...)` | foreign key constraint  |             |
 | `CONSTRAINT <name it> UNIQUE(column1, column2, ......)`                                                 | unique value for column |             |
