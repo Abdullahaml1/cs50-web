@@ -3,7 +3,7 @@ pronounced squel
 
 
 | **Commands**                       | **Description**         | **More Info** |
-|------------------------------------+-------------------------+---------------|
+|------------------------------------|-------------------------|---------------|
 | `use <databease name>`             | switch to the database  |               |
 | `CREATE DATABASE <databases name>` | create new database     |               |
 | `SHOW TABLES`                      | list tables in database |               |
