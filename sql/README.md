@@ -15,7 +15,7 @@ pronounced squel
 
 `ALTER TABLE <table name>`
 | **Commands**                                                                      | **Description**    | **Example**                                                         |
-|-----------------------------------------------------------------------------------+--------------------+---------------------------------------------------------------------|
+|-----------------------------------------------------------------------------------|--------------------|---------------------------------------------------------------------|
 |                                                                                   | rename table       |                                                                     |
 | `RENAME  COLUMN <old attribute name> to <new attribute name>`                     | rename attribute   |                                                                     |
 | `MODIFY COLUMN <attribute name> <new Type>`                                       | redefines the type | `alter table customers modify customer_name varchar(100) not null;` |
@@ -33,7 +33,7 @@ alter table customers modify customer_name varchar(100) not null;
 
 **CONSTRAINT**
 | **Commands**                                                                                            | **Description**         | **Example** |
-|---------------------------------------------------------------------------------------------------------+-------------------------+-------------|
+|---------------------------------------------------------------------------------------------------------|-------------------------|-------------|
 | `CONSTRAINT <name it> PRIMARY KEY (cloumn1, column2, ....)`                                             | setting primary key     |             |
 | `CONSTRAINT <name it> FOREIGN KEY (column1_yourtable, ...) REFERENCES other_table(column1_to_link,...)` | foreign key constraint  |             |
 | `CONSTRAINT <name it> UNIQUE(column1, column2, ......)`                                                 | unique value for column |             |
