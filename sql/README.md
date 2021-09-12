@@ -4,10 +4,10 @@ pronounced squel
 
 | **Commands**                       | **Description**         | **More Info** |
 |------------------------------------|-------------------------|---------------|
+| `show databases`                   | list databases          |               |
 | `use <databease name>`             | switch to the database  |               |
 | `CREATE DATABASE <databases name>` | create new database     |               |
 | `SHOW TABLES`                      | list tables in database |               |
-| `show databases`                   | list databases          |               |
 | `DROP TABLE <table name>`          | remove table            |               |
 | `DESCRIBE <table name>`            | shows  structure table  |               |
 
