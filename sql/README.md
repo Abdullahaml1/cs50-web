@@ -142,7 +142,7 @@ WHERE supplier_id = 100;
 ## Retrieving Data
 
 | **Commands**                                                                                                                 | **Description**                                                                                                                                         |
-|------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `SELECT * FROM <table name>`                                                                                                 | retrieving all table data                                                                                                                               |
 | `SELECT * FROM <table name> WHERE <condition`                                                                                | retrieving rows with condition (select)                                                                                                                 |
 | `SELECT <columnx>, <cloumny>,... FROM <table name>`                                                                          | retrieving all table data with provided columns  (project)                                                                                              |
@@ -154,7 +154,13 @@ WHERE supplier_id = 100;
 | `SELECT <column_x>,... <aggr_func>(<column_x>),... WHERE <condition> GROUP BY <column_x> HAVING <condtion on aggr_func>`     | retrieves a table with (<column_x>, aggregate funciton(<column_x>))  after applying condition on the table and condition on aggregate function (HAVING) |
 | `SELECT <col_x>, <col_y>, <col_z> FROM <table_name> WHERE <condtion> OREDR BY <col_x>` <ASC or DESC>                         | retrieves table with columns ordered (ascending or descending of col_x)                                                                                 |
 | `SELECT <col_x>, <col_y>, <col_z> FROM <table_name> WHERE <condtion> OREDR BY <col_x>` <ASC or DESC>, <col_y>` <ASC or DESC> | retrieves table with columns ordered (ascending or descending of col_x)  and every row in col_x ordered with (col_y ascending or descending)            |
-| `SELECT <columnx>&#124;&#124; '<a word>' &#124;&#124; <cloumny> as <new name>,... FROM <table name>`                                             | concatenate the columns and change the diplay name to <new name>                                                                                        |
+
+
+concatenate the columns and change the diplay name to <new name>
+```sql
+
+ SELECT <columnx> || '<a word>' || <cloumny> as <new name>,... FROM <table name>
+```
 
 Example for `SELECT`
 ```sql
@@ -182,14 +188,14 @@ FROM suppliers, products
 WHERE suppliers.supplier_id = products.supplier_id;
 ```
 
-Example on aggregate function
+Example on `aggregate function`
 ```sql
 SELECT COUNT(*)
 FROM products
 WHERE NOT City = 'Alex';
 ```
 
-Example on GROUP BY
+Example on `GROUP BY`
 ```sql
 SELECT department_number, COUNT(*)
 FROM employees
@@ -204,7 +210,7 @@ Output:
 |                 3 |        9 |
 |                 4 |        8 |
 
-Example on GROUP BY and HAVING
+Example on `GROUP BY` and `HAVING`
 ```sql
 SELECT department_number, COUNT(*)
 FROM employees
@@ -220,7 +226,7 @@ Output:
 |                 4 |        8 |
 
 
-Example on ORDER BY
+Example on `ORDER BY`
 ```sql
 SELECT department_number, sallery
 FROM employees
