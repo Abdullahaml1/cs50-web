@@ -1,6 +1,16 @@
 # SQL
 pronounced squel
 
+`.sql` extension for sql statements script to execute it
+```bash
+mysql -u "username" -p "password" < /tmp/myfile.sql
+```
+
+and from mysql shell
+```sql
+source file.sql
+```
+
 
 ## Table structure (DDL Data Definition Lamguage)
 
@@ -131,14 +141,20 @@ WHERE supplier_id = 100;
 
 ## Retrieving Data
 
-| **Commands**                                                                     | **Description**                                                               | **More Info** |
-|----------------------------------------------------------------------------------|-------------------------------------------------------------------------------|---------------|
-| `SELECT * FROM <table name>`                                                     | retrieving all table data                                                     |               |
-| `SELECT * FROM <table name> WHERE <condition`                                    | retrieving rows with condition (select)                                       |               |
-| `SELECT <columnx>, <cloumny>,... FROM <table name>`                              | retrieving all table data with provided columns  (project)                    |               |
-| `SELECT <columnx>, <cloumny>,... FROM <table name> WHERE <conditon>`             | retrieving rows with condition with provided columns (select + project)       |               |
-| `SELECT <columnx>, <cloumny>,... FROM <table_x>, <table_y>,... WHERE <conditon>` | retrieving rows with condition with provided columns (join+ select + project) |               |
-
+| **Commands**                                                                                                                 | **Description**                                                                                                                                         |
+|------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `SELECT * FROM <table name>`                                                                                                 | retrieving all table data                                                                                                                               |
+| `SELECT * FROM <table name> WHERE <condition`                                                                                | retrieving rows with condition (select)                                                                                                                 |
+| `SELECT <columnx>, <cloumny>,... FROM <table name>`                                                                          | retrieving all table data with provided columns  (project)                                                                                              |
+| `SELECT <columnx>, <cloumny>,... FROM <table name> WHERE <conditon>`                                                         | retrieving rows with condition with provided columns (select + project)                                                                                 |
+| `SELECT <columnx>, <cloumny>,... FROM <table_x>, <table_y>,... WHERE <conditon>`                                             | retrieving rows with condition with provided columns (join+ select + project)                                                                           |
+| `SELECT <aggregate function>(<column name or '*' for COUNT>) FROM <table_name>  WHERE <conditon>`                            | gets the aggregate function output from column with condtion                                                                                            |
+| `SELECT <aggr_func_x>(<col_name>), <aggr_func_y>(<col_name>),... FROM <table_name> WHERE <conditon>`                         | gets the aggregates function output from column with condtion                                                                                           |
+| `SELECT <column_x>,... <aggr_func>(<column_x>),... WHERE <condition> GROUP BY <column_x>`                                    | retrieves a table with (<column_x>, aggregate funciton(<column_x>))  after applying condition                                                           |
+| `SELECT <column_x>,... <aggr_func>(<column_x>),... WHERE <condition> GROUP BY <column_x> HAVING <condtion on aggr_func>`     | retrieves a table with (<column_x>, aggregate funciton(<column_x>))  after applying condition on the table and condition on aggregate function (HAVING) |
+| `SELECT <col_x>, <col_y>, <col_z> FROM <table_name> WHERE <condtion> OREDR BY <col_x>` <ASC or DESC>                         | retrieves table with columns ordered (ascending or descending of col_x)                                                                                 |
+| `SELECT <col_x>, <col_y>, <col_z> FROM <table_name> WHERE <condtion> OREDR BY <col_x>` <ASC or DESC>, <col_y>` <ASC or DESC> | retrieves table with columns ordered (ascending or descending of col_x)  and every row in col_x ordered with (col_y ascending or descending)            |
+| `SELECT <columnx>|| '<a word>' || <cloumny> as <new name>,... FROM <table name>`                                             | concatenate the columns and change the diplay name to <new name>                                                                                        |
 
 Example for `SELECT`
 ```sql
@@ -165,6 +181,80 @@ SELECT suppliers.supplier_id, supplier_name, product_id, product_name
 FROM suppliers, products
 WHERE suppliers.supplier_id = products.supplier_id;
 ```
+
+Example on aggregate function
+```sql
+SELECT COUNT(*)
+FROM products
+WHERE NOT City = 'Alex';
+```
+
+Example on GROUP BY
+```sql
+SELECT department_number, COUNT(*)
+FROM employees
+WHERE sallery > 2000
+GROUP BY department_number;
+```
+Output:
+| department_number | COUNT(*) |
+|-------------------|----------|
+|                 1 |       10 |
+|                 2 |        4 |
+|                 3 |        9 |
+|                 4 |        8 |
+
+Example on GROUP BY and HAVING
+```sql
+SELECT department_number, COUNT(*)
+FROM employees
+WHERE sallery > 2000
+GROUP BY department_number
+HAVING COUNT(*) > 5;
+```
+Output:
+| department_number | COUNT(*) |
+|-------------------|----------|
+|                 1 |       10 |
+|                 3 |        9 |
+|                 4 |        8 |
+
+
+Example on ORDER BY
+```sql
+SELECT department_number, sallery
+FROM employees
+WHERE sallery >100
+ORDER BY department DESC;
+```
+Output:
+| department_number | salary |
+|-------------------|--------|
+|                 4 |    200 |
+|                 4 |    500 |
+|                 4 |    150 |
+|                 3 |    800 |
+|                 3 |    200 |
+|                 1 |    700 |
+
+```sql
+SELECT department_number, salary
+FROM employees
+WHERE sallery >100
+ORDER BY department_number DESC, salary ASC;
+```
+Output:
+| department_number | salary |
+|-------------------|--------|
+|                 4 |    150 |
+|                 4 |    150 |
+|                 4 |    500 |
+|                 3 |    200 |
+|                 3 |    800 |
+|                 1 |    700 |
+
+
+
 
 
 
