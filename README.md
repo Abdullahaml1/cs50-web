@@ -10,3 +10,5 @@ implementation of cs50 web course
 (despite the order)
 
 # Django [my Djnago README](django/README.md)
+
+# SQL [my SQL README](sql/README.md)
