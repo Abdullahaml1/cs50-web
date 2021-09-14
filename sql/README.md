@@ -259,18 +259,3 @@ Output:
 |                 3 |    800 |
 |                 1 |    700 |
 
-
-
-
-
-
-
-# 1.Working with Tables
-
-
-# 2.Working with Containers
-
-
-# 3.Working with Data
-
-# 4.Retrieving Data
