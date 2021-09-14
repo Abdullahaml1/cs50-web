@@ -154,7 +154,7 @@ WHERE supplier_id = 100;
 | `SELECT <column_x>,... <aggr_func>(<column_x>),... WHERE <condition> GROUP BY <column_x> HAVING <condtion on aggr_func>`     | retrieves a table with (<column_x>, aggregate funciton(<column_x>))  after applying condition on the table and condition on aggregate function (HAVING) |
 | `SELECT <col_x>, <col_y>, <col_z> FROM <table_name> WHERE <condtion> OREDR BY <col_x>` <ASC or DESC>                         | retrieves table with columns ordered (ascending or descending of col_x)                                                                                 |
 | `SELECT <col_x>, <col_y>, <col_z> FROM <table_name> WHERE <condtion> OREDR BY <col_x>` <ASC or DESC>, <col_y>` <ASC or DESC> | retrieves table with columns ordered (ascending or descending of col_x)  and every row in col_x ordered with (col_y ascending or descending)            |
-| `SELECT <columnx>|| '<a word>' || <cloumny> as <new name>,... FROM <table name>`                                             | concatenate the columns and change the diplay name to <new name>                                                                                        |
+| `SELECT <columnx>&#124;&#124; '<a word>' &#124;&#124; <cloumny> as <new name>,... FROM <table name>`                                             | concatenate the columns and change the diplay name to <new name>                                                                                        |
 
 Example for `SELECT`
 ```sql
