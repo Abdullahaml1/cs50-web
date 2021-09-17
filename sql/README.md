@@ -53,8 +53,8 @@ alter table customers modify customer_name varchar(100) not null;
 | `DEFAULT`     | default value for a column                                        | `<col_name> <data_type> DEFAULT <default_value>`   |                                                                                                         |
 | `UNIQUE`      | unique value for column                                           | `<col_name> <data_type> UNIQUE`                    | `CONSTRAINT <name it> UNIQUE(column1, column2, ......)`                                                 |
 | `PRIMARY KEY` | setting primary key                                               | `<col_name> <data_type> PRIMARY KEY` not for mysql | `CONSTRAINT <name it> PRIMARY KEY (cloumn1, column2, ....)`                                             |
-| 'FOREIGN KEY' | foreign key constraint                                            |                                                    | `CONSTRAINT <name it> FOREIGN KEY (column1_yourtable, ...) REFERENCES other_table(column1_to_link,...)` |
-| 'CHECK'       | like <, >, ==, BETWEEN, IN constraints                            |                                                    | `CONSTRAINT <name_it> CHECK(<condtion to apply on cloumns>)`                                            |
+| `FOREIGN KEY` | foreign key constraint                                            |                                                    | `CONSTRAINT <name it> FOREIGN KEY (column1_yourtable, ...) REFERENCES other_table(column1_to_link,...)` |
+| `CHECK`       | like <, >, ==, BETWEEN, IN constraints                            |                                                    | `CONSTRAINT <name_it> CHECK(<condtion to apply on cloumns>)`                                            |
 | `INDEX`       | `creates index on column to be fast in search (UPDATE or SELECT)` |                                                    | `CREATE INDEX <index_name> <table_name> ON (<col1>, <col2>,...)`                                        |
 
 
