@@ -31,14 +31,14 @@ source file.sql
 |-----------------------------------------------------------------------------------|--------------------|---------------------------------------------------------------------|
 |                                                                                   | rename table       |                                                                     |
 | `RENAME  COLUMN <old attribute name> to <new attribute name>`                     | rename attribute   |                                                                     |
-| `MODIFY COLUMN <attribute name> <new Type>`                                       | redefines the type | `alter table customers modify customer_name varchar(100) not null;` |
+| `MODIFY COLUMN <attribute name> <new Type> <new inline constrint>`                | redefines the type | `alter table customers modify customer_name varchar(100) not null;` |
 | `ADD (<new attribute name> <type>, <new attribute name> <type>)`                  | add new column     |                                                                     |
 | `DROP <column name>`                                                              | remove column      |                                                                     |
 | `ADD CONSTRAINT <your constraint name> CONSTRAINT_TYPE (cloumn1,column2,...... )` | add constraint     |                                                                     |
 | `DROP CONSTRAINT <constraint_name>`                                               | remove constraint  |                                                                     |
 | `DROP CHECK <check name>`                                                         | for mysql only     |                                                                     |
 | `DISABLE CONSTRAINT <constraint name>`                                            | disable constraint |                                                                     |
-| `ENABLE CONSTRAINT <constraint name>`                                             | enable constraint |                                                                     |
+| `ENABLE CONSTRAINT <constraint name>`                                             | enable constraint  |                                                                     |
 
 
 EX: 
@@ -47,18 +47,21 @@ alter table customers modify customer_name varchar(100) not null;
 ```
 
 ### CONSTRAINT
-| **Commands**                                                                                            | **Description**                        | **Example** |
-|---------------------------------------------------------------------------------------------------------|----------------------------------------|-------------|
-| `CONSTRAINT <name it> PRIMARY KEY (cloumn1, column2, ....)`                                             | setting primary key                    |             |
-| `CONSTRAINT <name it> FOREIGN KEY (column1_yourtable, ...) REFERENCES other_table(column1_to_link,...)` | foreign key constraint                 |             |
-| `CONSTRAINT <name it> UNIQUE(column1, column2, ......)`                                                 | unique value for column                |             |
-| `CONSTRAINT <name_it> CHECK(<condtion to apply on cloumns>)`                                            | like <, >, ==, BETWEEN, IN constraints |             |
+| **Name**      | **Description**                                                   | **inline with table creation**                     | **`CONSTRAINT` clause**                                                                                 |
+|---------------|-------------------------------------------------------------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| `NOT NULL`    | value must be filled                                              | `<col_name> <data_type> NOT NULL                   |                                                                                                         |
+| `DEFAULT`     | default value for a column                                        | `<col_name> <data_type> DEFAULT <default_value>`   |                                                                                                         |
+| `UNIQUE`      | unique value for column                                           | `<col_name> <data_type> UNIQUE`                    | `CONSTRAINT <name it> UNIQUE(column1, column2, ......)`                                                 |
+| `PRIMARY KEY` | setting primary key                                               | `<col_name> <data_type> PRIMARY KEY` not for mysql | `CONSTRAINT <name it> PRIMARY KEY (cloumn1, column2, ....)`                                             |
+| 'FOREIGN KEY' | foreign key constraint                                            |                                                    | `CONSTRAINT <name it> FOREIGN KEY (column1_yourtable, ...) REFERENCES other_table(column1_to_link,...)` |
+| 'CHECK'       | like <, >, ==, BETWEEN, IN constraints                            |                                                    | `CONSTRAINT <name_it> CHECK(<condtion to apply on cloumns>)`                                            |
+| `INDEX`       | `creates index on column to be fast in search (UPDATE or SELECT)` |                                                    | `CREATE INDEX <index_name> <table_name> ON (<col1>, <col2>,...)`                                        |
 
 
 ### Create Table
 ```sql
 CREATE TABLE table_name 
-(<column1 name> DATATYPE null /not null,
+(<column1 name> DATATYPE <constraint_name here or with CONSTRAINT clause> null /not null,
  <column2 name> DATATYPE null /not null,
  <column3 name> DATATYPE null /not null,
  CONSTRAINT <your constraint name> CONSTRAINT_TYPE (cloumn1, column2, ....)
@@ -98,7 +101,7 @@ CONSTRAINT price_check CHECK (price BETWEEN 1 and 10000) --there is another way 
 | **Commands**                                                                   | **Description**                      | **More Info** |
 |--------------------------------------------------------------------------------|--------------------------------------|---------------|
 | `INSERT INTO <table name> VLUES(value1, value2,...)`                           | insert into row                      |               |
-| `INSERT INTO <table name> (coulmnx, columny, ...) VALUES(valuex, valuey, ...)` | insert into defined columns          |               |
+| `INSERT INTO <table name> (coulmnu, columny, ...) VALUES(valuex, valuey, ...)` | insert into defined columns          |               |
 | `UPDATE <table name> SET <column name> = <value> WHERE <condition>`            | update column in rows with condition |               |
 | `DELETE FROM <table name>`                                                     | deletes all rows in table            |               |
 | `DELETE FROM <table name> WHERE <condtion>`                                    | deletes rows with condition          |               |
@@ -258,4 +261,23 @@ Output:
 |                 3 |    200 |
 |                 3 |    800 |
 |                 1 |    700 |
+
+## SQL `VIEW`
+a `view` is a virtual table created from a SQL querey and has a reference to tables that are created from. All statements used with table can be used with `VIEW`
+```SQL
+CREATE OR REPLACE VIEW <view_name> 
+AS 
+-- a sql select statment 
+WITH CHECK OPTION --will make the condtion in WHERE clause a constraint
+```
+
+Example
+```SQL
+CREATE OR REPLACE VIEW vw_order
+AS
+SELECT products.product_id, product_name, price, supplier_name
+FROM products, suppliers
+WHERE products.products_id = suppliers_id
+WITH CHECK OPTION;
+```
 
