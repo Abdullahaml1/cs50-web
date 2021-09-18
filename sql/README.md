@@ -14,14 +14,15 @@ source file.sql
 
 ## Table structure (DDL Data Definition Lamguage)
 
-| **Commands**                                                                   | **Description**             | **More Info** |
-|--------------------------------------------------------------------------------|-----------------------------|---------------|
-| `show databases`                                                               | list databases              |               |
-| `use <databease name>`                                                         | switch to the database      |               |
-| `CREATE DATABASE <databases name>`                                             | create new database         |               |
-| `SHOW TABLES`                                                                  | list tables in database     |               |
-| `DROP TABLE <table name>`                                                      | remove table                |               |
-| `DESCRIBE <table name>`                                                        | shows  structure table      |               |
+| **Commands**                       | **Description**         | **More Info** |
+|------------------------------------|-------------------------|---------------|
+| `show databases`                   | list databases          |               |
+| `use <databease name>`             | switch to the database  |               |
+| `CREATE DATABASE <databases name>` | create new database     |               |
+| `SHOW TABLES`                      | list tables in database |               |
+| `DROP TABLE <table name>`          | remove table            |               |
+| `DESCRIBE <table name>`            | shows  structure table  |               |
+| `.schema`                          | list tables in sqlite3  |               |
 
 
 
