@@ -14,15 +14,16 @@ source file.sql
 
 ## Table structure (DDL Data Definition Lamguage)
 
-| **Commands**                       | **Description**         | **More Info** |
-|------------------------------------|-------------------------|---------------|
-| `show databases`                   | list databases          |               |
-| `use <databease name>`             | switch to the database  |               |
-| `CREATE DATABASE <databases name>` | create new database     |               |
-| `SHOW TABLES`                      | list tables in database |               |
-| `DROP TABLE <table name>`          | remove table            |               |
-| `DESCRIBE <table name>`            | shows  structure table  |               |
-| `.schema`                          | list tables in sqlite3  |               |
+| **Commands**                       | **Description**                                     |
+|------------------------------------|-----------------------------------------------------|
+| `show databases`                   | list databases                                      |
+| `use <databease name>`             | switch to the database                              |
+| `CREATE DATABASE <databases name>` | create new database                                 |
+| `SHOW TABLES`                      | list tables in database                             |
+| `DROP TABLE <table name>`          | remove table                                        |
+| `DESCRIBE <table name>`            | shows  structure table                              |
+| `.tables`                          | list tables in (sqlite3)                            |
+| `.schema`                          | list command was used to create tables in (sqlite3) |
 
 
 
@@ -281,4 +282,11 @@ FROM products, suppliers
 WHERE products.products_id = suppliers_id
 WITH CHECK OPTION;
 ```
+
+# SQLITE3 special commands
+
+| **Statement**   | **Description**                 |
+|-----------------+---------------------------------|
+| `.mode columns` | displate table over columns     |
+| `.headers yes`  | adding a ---- under ever column |
 
