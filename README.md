@@ -12,3 +12,4 @@ implementation of cs50 web course
 # Django [my Djnago README](django/README.md)
 
 # SQL [my SQL README](sql/README.md)
+## Django Models [my Django Models README.md](sql/DjangoModelsREADME.md)
