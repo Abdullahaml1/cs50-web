@@ -6,10 +6,25 @@ you have to define your models using `django.models.Model` class prefarable to u
 ```python
 from django.db import models
 
+# Create your models here.
+
+
+
+class Airport(models.Model):
+    code = models.CharField(max_length=3, primary_key=True)
+    name = models.CharField(max_length=64 )
+
+
 class Flight (models.Model):
-    origin = models.CharField(max_length=64)
-    destination = models.CharField(max_length=64)
+    origin = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='departure')
+    destination = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='arrival')
     duratiion = models.IntegerField()
+
+
+class Passenger (models.Model):
+    flights = models.ManyToManyField(Flight, blank=True, related_name='passengers')
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
 
 ```
 * The types of Fields is [here](https://docs.djangoproject.com/en/3.2/ref/models/fields/#field-types)
