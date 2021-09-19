@@ -16,7 +16,7 @@ class Flight (models.Model):
 * valid attributes for fields are [here](https://docs.djangoproject.com/en/3.2/topics/db/models/#field-options) basics ones:
 
 | Attribute Name                | Description                                                      |
-|-------------------------------+------------------------------------------------------------------|
+|-------------------------------|------------------------------------------------------------------|
 | `null=True/False`             | corresponds to (NULL, NOT NULL) of sql                           |
 | `blank=True/False`            | like `null`but it is a validation before inserting into database |
 | `default=<the defualt value>` | like sql DEFAULT                                                 |
